@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import {
-    ColumnCenteredFlexWithPadding,
     ColumnFlexbox,
-    ColumnFlexWithPadding,
+    ColumnFlexWithPadding, Flexbox,
     FlexWithSpacing
 } from "../shared";
 import {Color} from "../../constants/colors";
@@ -24,14 +23,14 @@ const categories: Category[] = [
 
 export const WorkspacePanel = () => {
     return (
-        <WorkspacePanelComponent className={'123'}>
+        <WorkspacePanelComponent>
             <PanelHeader spacing={'26px'}>
                 <Logo/>
-                <StyledInput value={'asd'} onChange={() => {
+                <StyledInput value={'Search...'} onChange={() => {
                 }}/>
             </PanelHeader>
 
-            <WorkspaceMenu spacing={'18px'}>
+            <WorkspaceMenu spacing={'13px'}>
                 <WorkspaceTitle spacing={'8px'}>
                     <StyledAvatar/>
                     <div>
@@ -57,18 +56,23 @@ const StyledAvatar = styled(Avatar)`
   width: 22px;
 `
 
-const PanelHeader = styled(ColumnCenteredFlexWithPadding)`  padding: 20px 16px;
+const PanelHeader = styled(ColumnFlexWithPadding)`  
+  width: 100%;
+  padding: 26px 16px 20px;
 `
 
 const WorkspacePanelComponent = styled(ColumnFlexbox)`
-  max-width: 220px;
+  max-width: 219px;
   background-color: ${Color.MainDark};
   height: 100%;
+  font-size: 14px;
+  width: 100%;
 `
 
 const StyledInput = styled(Input)`
   background-color: ${Color.SecondaryDark};
-  padding: 10px;
+  padding: 8px 10px;
+  line-height: 17px;
   border-radius: 4px;
   color: ${Color.MainGray};
 `
@@ -79,7 +83,6 @@ const Logo = () =>
 
 
 const LogoComponent = styled.div`
-  margin-top: 26px;
   width: 132px;
   height: 32px;
 `
@@ -90,8 +93,7 @@ const WorkspaceTitle = styled(FlexWithSpacing)`
   background-color: ${Color.SecondaryDark};
   color: ${Color.MainBackground};
   width: 100%;
-  margin-bottom: 20px;
-  padding: 10px;
+  padding: 5px 16px;
 `
 
 interface Category {
@@ -100,17 +102,17 @@ interface Category {
 }
 
 const CategoriesWrapper = styled(ColumnFlexWithPadding)`
-  padding: 10px 16px;
+  padding: 0 16px;
 `
 
 
 const WokrkspaceCategory = (props: Category) => {
     return (
         <ColumnFlexWithPadding spacing={'10px'}>
-            <FlexWithSpacing spacing={'8px'}>
-                <StyledIcon icon={IconType.ArrowDown}/>
+            <CategoryWrapper spacing={'8px'}>
+                <StyledIcon icon={IconType.ArrowUp}/>
                 <CategoryTitle>{props.title}</CategoryTitle>
-            </FlexWithSpacing>
+            </CategoryWrapper>
             <StyledFlex spacing={'18px'}>
                 {props.chapters.map(chapter => <div key={chapter}>{chapter}</div>)}
             </StyledFlex>
@@ -118,6 +120,9 @@ const WokrkspaceCategory = (props: Category) => {
     )
 }
 
+const CategoryWrapper = styled(FlexWithSpacing)`
+  align-items: center;
+`
 
 const StyledIcon = styled(Icon)`
   color: ${Color.MainBackground}

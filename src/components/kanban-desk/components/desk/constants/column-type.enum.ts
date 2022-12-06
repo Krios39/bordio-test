@@ -6,8 +6,8 @@ export enum ColumnType {
 }
 
 export const columnTypeName = {
-    [ColumnType.NewTask]:'New Task',
+    [ColumnType.NewTask]:'New task',
     [ColumnType.Scheduled]:'Scheduled',
-    [ColumnType.InProgress]:'In Progress',
+    [ColumnType.InProgress]:'In progress',
     [ColumnType.Completed]:'Completed'
 }

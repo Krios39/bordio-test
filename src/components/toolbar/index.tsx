@@ -4,14 +4,29 @@ import {Color} from "../../constants/colors";
 import {Icon} from "../shared";
 import { IconType } from "../../constants/icon-type";
 
-const tools: string[] = ['roadmap', 'schedule','tasks', 'notes','files']
+enum Tool {
+    Roadmap='roadmap',
+    Schedule='schedule',
+    Tasks='tasks',
+    Notes='notes',
+    Files='files'
+}
+
+const toolName = {
+    [Tool.Roadmap]: 'Roadmap',
+    [Tool.Schedule]: 'Schedule',
+    [Tool.Tasks]: 'Tasks',
+    [Tool.Notes]: 'Notes',
+    [Tool.Files]: 'Files',
+}
+
 
 export const Toolbar = () => {
     return (
         <ToolbarComponent>
             <ToolbarTitle>Tools</ToolbarTitle>
             <ColumnFlexbox>
-                {tools.map((tool, index) => <Tool key={tool} active={index === 1} tool={tool}/>)}
+                {Object.values(Tool).map((tool, index) => <ToolCard key={tool} active={index === 1} tool={tool}/>)}
             </ColumnFlexbox>
         </ToolbarComponent>
     )
@@ -22,22 +37,22 @@ const ToolbarTitle = styled.div`
   padding: 24px;
 `
 
-const Tool = ({tool, active}: { tool: string, active: boolean }) => {
+const ToolCard = ({tool, active}: { tool: Tool, active: boolean }) => {
     return (
         <ToolComponent active={active} spacing={'10px'}>
-            <StyledIcon icon={tool as IconType}/>
-            <div>{tool} </div>
+            <StyledIcon active={active} icon={tool}/>
+            <ToolTitle active={active}>{toolName[tool]} </ToolTitle>
         </ToolComponent>)
 }
 
 const ToolComponent = styled(FlexWithSpacing)<{ active?: boolean }>`
-  color: ${({active}) => (active ? Color.MainBlue : Color.MainDark)};
   background-color: ${({active}) => (active && Color.MainBackground)};
   border-radius: 0 8px 8px 0;
   padding: 10px;
   align-items: center;
   position: relative;
   overflow: hidden;
+  width: 138px;
   
   ${({active}) => active && `
    ::after{
@@ -45,7 +60,7 @@ const ToolComponent = styled(FlexWithSpacing)<{ active?: boolean }>`
     position: absolute;
     width: 100%;
     height: 100%;
-    border: 3px solid ${Color.MainBlue};
+    border: 4px solid ${Color.MainBlue};
     box-sizing: border-box;
     border-radius: 6px;
     top: 0;
@@ -54,7 +69,12 @@ const ToolComponent = styled(FlexWithSpacing)<{ active?: boolean }>`
   ` }
 `
 
-const StyledIcon = styled(Icon)`
+const ToolTitle = styled.div<{ active?: boolean }>`
+  color: ${({active}) => (active&& Color.MainBlue)};
+`
+
+const StyledIcon = styled(Icon)<{ active?: boolean }>`
+  color: ${({active}) => (active ? Color.MainBlue : Color.MainGray)};
   height: 28px;
   width: 28px;
 `

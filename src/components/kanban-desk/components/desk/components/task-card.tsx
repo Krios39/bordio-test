@@ -62,9 +62,9 @@ export const TaskCard = (
     drag(drop(ref));
 
     return (
-        <TaskCardWrapper spacing={'2px'} isDragging={isDragging} color={task.color} ref={ref} column={task.column}>
-            <div>{task.name}</div>
-            <div>{convertTimeFromMinutes(task.durationInMinutes)}</div>
+        <TaskCardWrapper spacing={'8px'} isDragging={isDragging} color={task.color.background} ref={ref} column={task.column}>
+            <TaskTitle column={task.column}>{task.name}</TaskTitle>
+            <TaskTime color={task.color.time} column={task.column}>{convertTimeFromMinutes(task.durationInMinutes)}</TaskTime>
         </TaskCardWrapper>
     );
 };
@@ -77,7 +77,22 @@ const TaskCardWrapper = styled(ColumnFlexWithPadding)<{ color: string, isDraggin
 
   ${({column}) => column === ColumnType.Completed && `
     background-color: #F0F0F0;
-    text-decoration-line: line-through;
-    color:#A5A5A5;
   `}
+`
+const TaskText = styled.div<{ column: ColumnType }>`
+  ${({column}) => column === ColumnType.Completed && `
+    color:#A5A5A5 !important;
+  `}
+`
+const TaskTitle = styled(TaskText)<{ column: ColumnType }>`
+  ${({column}) => column === ColumnType.Completed && `
+    text-decoration-line: line-through;
+  `}
+
+`
+
+const TaskTime = styled(TaskText)<{ color: string }>`
+  color: ${({color}) => color};
+  font-size: 13px;
+  line-height: 15px;
 `

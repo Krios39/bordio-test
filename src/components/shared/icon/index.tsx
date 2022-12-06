@@ -3,7 +3,7 @@ import {IconType} from "../../../constants/icon-type";
 
 interface IconProps {
     className?: string,
-    icon: IconType
+    icon: IconType | string
 }
 
 export const Icon = (props: IconProps) =>

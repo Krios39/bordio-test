@@ -28,6 +28,7 @@ export const GlobalStyle = createGlobalStyle`
   dl,
   dd {
     margin: 0;
+    font-size: 14px;
   }
 
   body {

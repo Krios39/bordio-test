@@ -13,7 +13,7 @@ import {Color} from "../../../../constants/colors";
 import {IconType} from "../../../../constants/icon-type";
 
 export const tasks: Task[] = [
-    {id: 1, name: 'Item 1', durationInMinutes: getRandomInt(300), column: ColumnType.NewTask, color: getRandomColor()},
+    {id: 1, name: 'Item 1 asdasdas asdassd ttassca asjjjc ahgc yggjccasc ahggc ajkkcbcyd yycgvhsc', durationInMinutes: getRandomInt(300), column: ColumnType.NewTask, color: getRandomColor()},
     {id: 2, name: 'Item 2', durationInMinutes: getRandomInt(300), column: ColumnType.NewTask, color: getRandomColor()},
     {id: 3, name: 'Item 3', durationInMinutes: getRandomInt(300), column: ColumnType.NewTask, color: getRandomColor()},
     {id: 4, name: 'Item 4', durationInMinutes: getRandomInt(300), column: ColumnType.NewTask, color: getRandomColor()},
@@ -44,13 +44,14 @@ export const Desk = () => {
     return (
         <DeskWrapper className="container">
             <DndProvider backend={HTML5Backend}>
-                {Object.values(ColumnType).map(type => {
+                {Object.values(ColumnType).map((type,index) => {
                         const tasks = items
                             .filter((item) => item.column === type)
+                        const isFirstColumn = index === 0
 
                         return (
-                            <Column title={type} taskCount={tasks.length}>
-                                <TasksWrapper spacing={'10px'}>
+                            <Column title={type} isFirstColumn={isFirstColumn} taskCount={tasks.length}>
+                                <TasksWrapper isFirstColumn={isFirstColumn} spacing={'10px'}>
                                     {tasks.map((item) => (
                                         <TaskCard
                                             key={item.id}
@@ -76,14 +77,14 @@ const CreateColumn = styled(Flexbox)`
   color: ${Color.MainGray};
   border-bottom: 1px solid #F3F3F3;
   border-left: 1px solid #F3F3F3;
-  align-items: flex-start;
+  align-items: center;
   padding: 29px 36px 13px ;
-  height: 58px;
+  height: 59px;
   width: 100%;
 `
 
-const TasksWrapper = styled(ColumnFlexWithPadding)`
-  padding: 40px 10px;
+const TasksWrapper = styled(ColumnFlexWithPadding)<{isFirstColumn: boolean}>`
+  padding: ${({isFirstColumn}) => isFirstColumn ? "40px 10px 40px 20px" : "40px 10px"};
   border-top: 1px solid #F3F3F3;
   border-right: 1px solid #F3F3F3;
   height: 100%;

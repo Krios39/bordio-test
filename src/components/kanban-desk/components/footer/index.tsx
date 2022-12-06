@@ -1,6 +1,6 @@
-import {CenteredFlex, FlexWithSpacing, HorizontalCenteredFlexWithSpaceBetween} from "../../../shared/typography/flex";
+import {CenteredFlex, FlexWithSpacing, HorizontalCenteredFlexWithSpaceBetween} from "../../../shared";
 import {Avatar, Button, Icon, Input} from "../../../shared";
-import {Option, Select} from "../../../shared/select";
+import {Option, Select} from "../../../shared";
 import {IconType} from "../../../../constants/icon-type";
 import styled from "styled-components";
 import {Color} from "../../../../constants/colors";
@@ -25,12 +25,35 @@ export const Header = ()=>{
             <Select value={options[1].value} options={options}/>
         </FlexWithSpacing>
         <FlexWithSpacing spacing={'16px'}>
-            <StyledInput value={'asd'} onChange={()=>{}}/>
-            <Icon icon={IconType.Notification}/>
+            <StyledInput value={'Search...'} onChange={()=>{}}/>
+            <NotificationWrapper>
+                <NotificationIcon icon={IconType.Notification}/>
+                <NotificationCounter>+99</NotificationCounter>
+            </NotificationWrapper>
             <StyledAvatar/>
         </FlexWithSpacing>
     </HeaderComponent>
 }
+
+const NotificationWrapper = styled.div`
+  position: relative;
+`
+const NotificationIcon = styled(Icon)`
+  height: 32px;
+  width: 32px;
+`
+const NotificationCounter = styled.div`
+  position: absolute;
+  background-color: ${Color.MainRed};
+  color: ${Color.MainBackground};
+  padding: 4px 3px;
+  border: 1px ${Color.MainBackground} solid;
+  top: -2px;
+  left: 14px;
+  border-radius: 5px;
+  font-size: 10px;
+  line-height: 10px;
+`
 
 const StyledAvatar = styled(Avatar)`
   border-radius: 50%;

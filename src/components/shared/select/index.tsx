@@ -39,16 +39,16 @@ export const Select = ({
         <SelectComponent className={className} spacing="0.3125rem">
             <SelectMenu disabled={disabled} fullWidth={!children} options={options}
                         onOptionClick={(value) => onChange?.(value)}>
-                <AAA spacing={'8px'}>
+                <SelectOption spacing={'8px'}>
                     <div>{value || ''}</div>
-                    <Icon icon={IconType.ArrowDown}/></AAA>
+                    <Icon icon={IconType.ArrowUp}/></SelectOption>
             </SelectMenu>
         </SelectComponent>
     );
 };
 
 
-const AAA = styled(FlexWithSpacing)`
+const SelectOption = styled(FlexWithSpacing)`
   width: 100%;
   background-color: ${Color.SecondaryBackground};
   padding: 8px 14px;

@@ -37,7 +37,8 @@ export const Input = (props: InputProps) => {
 
 const StyledIcon = styled(Icon)`
   color: ${Color.MainGray};
-
+  height: 16px;
+  width: 16px;
 `;
 
 const InputComponent = styled(ColumnFlexWithPadding)``;
@@ -57,7 +58,6 @@ const IconContainer = styled(StyledInputIcon)`
 
 
 const StyledInput = styled.input`
-  padding: 10px;
   border: none;
   outline: none;
 `
